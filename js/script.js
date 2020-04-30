@@ -53,12 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const board = document.querySelector(".board");
   var cardSelected = [];
+  var cardSelectedId = [];
+  var cardsWon = [];
 
   //Creating the board
   function createBoard() {
     for (let i = 0; i < collections.length; i++) {
       var card = document.createElement("img");
-      card.setAttribute("src", "../images/white.jpg");
+      card.setAttribute("src", "../images/fruits.jpg");
       card.setAttribute("data-id", i);
       card.addEventListener("click", flipCard);
       board.appendChild(card);
@@ -66,6 +68,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //Flipping the card
-  function flipCard() {}
+  function flipCard() {
+    var cardId = this.getAttribute("data-id");
+    cardSelected.push(collections[cardId].name);
+    cardChosenId.push(cardId);
+    this.setAttribute("src", collections[cardId].img);
+    if (cardSelected.length === 2) {
+      setTimeout(checkMatch, 500);
+    }
+  }
+
+  //Checking for match
+  function checkMatch() {
+    var cards = document.querySelectorAll("img");
+    const chosenOneId = cardSelectedId[0];
+    const chosenTwoId = cardSelectedId[1];
+    if (cardSelected[0] === cardSelected[1]) {
+      alert("You found a Match");
+      cards[chosenOneId].setAttribute("src", "../images/white.jpg");
+      cards[chosenTwoId].setAttribute("src", "../images/white.jpg");
+      cardsWon.push(cardsSelected);
+    } else {
+      cards[chosenOneId].setAttribute("src", "../images/fruits.jpg");
+      cards[chosenTwoId].setAttribute("src", "../images/fruits.jpg");
+      alert("Sorry! Try Again");
+    }
+    cardSelected = [];
+    cardSelectedId = [];
+  }
+
   createBoard();
 });
