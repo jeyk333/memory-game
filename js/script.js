@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const board = document.querySelector(".board");
   const score = document.querySelector("#score");
+  const won = document.querySelector(".won");
   var cardSelected = [];
   var cardSelectedId = [];
   var cardsWon = [];
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cardSelectedId = [];
     score.textContent = cardsWon.length;
     if (cardsWon.length === collections.length / 2) {
-      score.textContent = "Congratulations! You found them all";
+      won.textContent = "Congratulations! You found them all";
     }
   }
 
