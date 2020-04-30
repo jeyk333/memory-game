@@ -51,7 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
+  collections.sort(() => 0.3 - Math.random());
+
   const board = document.querySelector(".board");
+  const score = document.querySelector("#score");
   var cardSelected = [];
   var cardSelectedId = [];
   var cardsWon = [];
@@ -71,8 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function flipCard() {
     var cardId = this.getAttribute("data-id");
     cardSelected.push(collections[cardId].name);
-    cardChosenId.push(cardId);
-    this.setAttribute("src", collections[cardId].img);
+    cardSelectedId.push(cardId);
+    this.setAttribute("src", collections[cardId].image);
     if (cardSelected.length === 2) {
       setTimeout(checkMatch, 500);
     }
@@ -87,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("You found a Match");
       cards[chosenOneId].setAttribute("src", "../images/white.jpg");
       cards[chosenTwoId].setAttribute("src", "../images/white.jpg");
-      cardsWon.push(cardsSelected);
+      cardsWon.push(cardSelected);
     } else {
       cards[chosenOneId].setAttribute("src", "../images/fruits.jpg");
       cards[chosenTwoId].setAttribute("src", "../images/fruits.jpg");
@@ -95,6 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     cardSelected = [];
     cardSelectedId = [];
+    score.textContent = cardsWon.length;
+    if (cardsWon.length === collections.length / 2) {
+      score.textContent = "Congratulations! You found them all";
+    }
   }
 
   createBoard();
