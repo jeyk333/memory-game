@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  height: 300px;
+  width: 400px;
+  box-shadow: 3px 3px 5px 6px #ccc;
+}
